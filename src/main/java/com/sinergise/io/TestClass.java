@@ -23,7 +23,7 @@ public class TestClass {
                 "POLYGON ((40 40, 20 45, 45 30, 40 40)))";
         String geometrycollectionempty = "GEOMETRYCOLLECTION EMPTY";
         WKTReader reader = new WKTReader();
-        Geometry newp = reader.read(geometrycollectionempty);
+        Geometry newp = reader.read(point);
         System.out.println(newp);
     }
 
