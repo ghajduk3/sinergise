@@ -1,6 +1,7 @@
 package com.sinergise.io;
 import com.sinergise.geometry.Point;
 import com.sinergise.io.reader.WKTReader;
+import com.sinergise.io.writer.WKTWriter;
 
 public class TestClass {
 
@@ -8,8 +9,10 @@ public class TestClass {
 
         Point p = new Point(4,6);
         String point = "POINT (30 10)";
-        WKTReader reader = new WKTReader();
-        reader.read(point);
+
+        WKTWriter writer = new WKTWriter();
+        String wktString = writer.write(p);
+        System.out.println(wktString);
     }
 
 }
