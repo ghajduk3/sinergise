@@ -2,7 +2,9 @@ package com.sinergise.io.reader.readers;
 
 import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.MultiPolygon;
+import com.sinergise.geometry.Point;
 import com.sinergise.geometry.Polygon;
+import com.sinergise.io.utils.Constants;
 import com.sinergise.io.utils.Parser;
 
 import java.io.IOException;
@@ -15,7 +17,10 @@ public class MultiPolygonReader extends Reader{
 
     @Override
     public Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException {
-        Parser.getNextValidToken(tokenizer);
+        String nextToken = Parser.getNextValidToken(tokenizer);
+        if (nextToken.equalsIgnoreCase(Constants.EMPTY)){
+            return new MultiPolygon();
+        }
         List<Polygon> polygons = new ArrayList<>();
         PolygonReader polygonReader = new PolygonReader();
         do {

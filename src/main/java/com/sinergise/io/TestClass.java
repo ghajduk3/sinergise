@@ -21,8 +21,9 @@ public class TestClass {
         String geometrycollection = "GEOMETRYCOLLECTION (POINT (10 30) ,\n" +
                 "LINESTRING (10 10, 20 20, 10 40),\n" +
                 "POLYGON ((40 40, 20 45, 45 30, 40 40)))";
+        String geometrycollectionempty = "GEOMETRYCOLLECTION EMPTY";
         WKTReader reader = new WKTReader();
-        Geometry newp = reader.read(geometrycollection);
+        Geometry newp = reader.read(geometrycollectionempty);
         System.out.println(newp);
     }
 

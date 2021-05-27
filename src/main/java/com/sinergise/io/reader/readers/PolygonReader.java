@@ -2,7 +2,9 @@ package com.sinergise.io.reader.readers;
 
 import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.LineString;
+import com.sinergise.geometry.Point;
 import com.sinergise.geometry.Polygon;
+import com.sinergise.io.utils.Constants;
 import com.sinergise.io.utils.Parser;
 
 import java.io.IOException;
@@ -15,7 +17,10 @@ public class PolygonReader extends Reader {
 
     @Override
     public Polygon read(StreamTokenizer tokenizer) throws IOException, ParseException {
-        Parser.getNextValidToken(tokenizer);
+        String nextToken = Parser.getNextValidToken(tokenizer);
+        if (nextToken.equalsIgnoreCase(Constants.EMPTY)){
+            return new Polygon();
+        }
         LineStringReader lineStringReader = new LineStringReader();
         LineString outer = lineStringReader.read(tokenizer);
         List<LineString> holes = new ArrayList<>();

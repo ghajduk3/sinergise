@@ -3,6 +3,7 @@ package com.sinergise.io.reader.readers;
 import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.MultiPoint;
 import com.sinergise.geometry.Point;
+import com.sinergise.io.utils.Constants;
 import com.sinergise.io.utils.Parser;
 
 import java.io.IOException;
@@ -15,7 +16,10 @@ public class MultiPointReader extends Reader{
 
     @Override
     public Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException {
-        Parser.getNextValidToken(tokenizer);
+        String nextToken = Parser.getNextValidToken(tokenizer);
+        if (nextToken.equalsIgnoreCase(Constants.EMPTY)){
+            return new MultiPoint();
+        }
         PointReader pointReader = new PointReader();
         List<Point> points = new ArrayList<>();
 
