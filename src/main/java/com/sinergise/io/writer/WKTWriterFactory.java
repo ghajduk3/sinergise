@@ -8,7 +8,7 @@ import com.sinergise.io.writer.writers.Writer;
 public class WKTWriterFactory {
     public static Writer getWriter(Geometry geometry){
         if (geometry instanceof Point){
-            return new PointWriter(geometry);
+            return new PointWriter((Point) geometry);
         }
         return null;
     }

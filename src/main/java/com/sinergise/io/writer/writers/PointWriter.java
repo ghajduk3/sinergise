@@ -8,15 +8,17 @@ public class PointWriter extends Writer{
 
     private Point point;
 
-    public PointWriter(Geometry point){
-        this.point = (Point) point;
+    public PointWriter(Point point){
+        this.point = point;
     }
+
     @Override
     public String write() {
         StringBuffer wktString = new StringBuffer();
         if (point.isEmpty()){
             return wktString.toString();
         }
+
         wktString.append(String.format(Constants.POINT + " " + Constants.LEFT_PARENTHESES + "%.0f %.0f" + Constants.RIGHT_PARENTHESES,this.point.getX(), this.point.getY()));
 
         return wktString.toString();
