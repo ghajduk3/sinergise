@@ -1,20 +1,23 @@
 package com.sinergise.io.reader;
 
-import com.sinergise.geometry.Geometry;
-import com.sinergise.geometry.Point;
+import com.sinergise.geometry.*;
+import com.sinergise.io.reader.parsers.Parser;
+import com.sinergise.io.utils.ParserUtils;
 
-import java.util.StringTokenizer;
+import java.io.IOException;
+import java.io.StreamTokenizer;
+import java.io.StringReader;
+import java.text.ParseException;
 
 public class WKTReader {
 
-    public Geometry read (String wktString) {
-        StringTokenizer tokenizer = new StringTokenizer(wktString, "(), ", true);
-        System.out.println(tokenizer.nextToken());
-        System.out.println(tokenizer.nextToken());
-        System.out.println(tokenizer.nextToken());
-        System.out.println(tokenizer.nextToken());
-        System.out.println(tokenizer.nextToken());
-        System.out.println(tokenizer.nextToken());
-        return null;
+    public Geometry read(String wktString) throws IOException, ParseException {
+        try (StringReader reader = new StringReader(wktString)) {
+            StreamTokenizer tokenizer = ParserUtils.constructTokenizer(reader);
+            Parser wktParser = WKTReaderFactory.getReader(tokenizer);
+            return wktParser.read(tokenizer);
+        }
     }
+
+
 }
