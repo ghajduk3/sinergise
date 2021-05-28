@@ -2,7 +2,8 @@ package com.sinergise.io.writer.writers;
 
 import com.sinergise.geometry.Geometry;
 
-public abstract class Writer {
+public interface Writer<T extends Geometry>{
 
-    public abstract String write();
+    public abstract String write(T geometry);
+
 }

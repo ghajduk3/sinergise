@@ -4,23 +4,21 @@ import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.Point;
 import com.sinergise.io.utils.Constants;
 
-public class PointWriter extends Writer{
-
-    private Point point;
-
-    public PointWriter(Point point){
-        this.point = point;
-    }
+public class PointWriter implements Writer<Point>{
 
     @Override
-    public String write() {
-        StringBuffer wktString = new StringBuffer();
+    public String write(Point point) {
+        StringBuffer wktString = new StringBuffer(Constants.POINT + " ");
         if (point.isEmpty()){
+            wktString.append(Constants.EMPTY);
             return wktString.toString();
         }
-
-        wktString.append(String.format(Constants.POINT + " " + Constants.LEFT_PARENTHESES + "%.0f %.0f" + Constants.RIGHT_PARENTHESES,this.point.getX(), this.point.getY()));
-
+        wktString.append(writePoint(point));
         return wktString.toString();
     }
+
+    protected String writePoint(Point point){
+        return String.format(Constants.LEFT_PARENTHESES + "%.0f %.0f" + Constants.RIGHT_PARENTHESES,point.getX(), point.getY());
+    }
+
 }
