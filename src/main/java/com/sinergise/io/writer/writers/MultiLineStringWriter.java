@@ -24,9 +24,11 @@ public class MultiLineStringWriter implements Writer<MultiLineString>{
     protected String writeMultiLineString(MultiLineString multiLineString){ ;
         String wktMultiLineString = Constants.LEFT_PARENTHESES;
 
-        for (LineString lineString : multiLineString) {
-            wktMultiLineString += LineStringWriter.writeCoordinateSequence(lineString);
-            wktMultiLineString += ", ";
+        for (int index=0; index < multiLineString.size(); index++){
+            wktMultiLineString += LineStringWriter.writeCoordinateSequence(multiLineString.get(index));
+            if (index != multiLineString.size()-1){
+                wktMultiLineString += ", ";
+            }
         }
         wktMultiLineString += Constants.RIGHT_PARENTHESES;
 

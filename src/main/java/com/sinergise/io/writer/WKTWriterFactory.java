@@ -17,6 +17,15 @@ public class WKTWriterFactory {
         else if (geometry instanceof MultiPoint) {
             return new MultiPointWriter();
         }
+        else if (geometry instanceof MultiPolygon) {
+            return new MultiPolygonWriter();
+        }
+        else if (geometry instanceof MultiLineString) {
+            return new MultiLineStringWriter();
+        }
+        else if (geometry instanceof GeometryCollection) {
+            return new CollectionWriter();
+        }
         return null;
     }
 }

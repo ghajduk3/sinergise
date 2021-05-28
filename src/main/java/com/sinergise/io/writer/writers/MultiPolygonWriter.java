@@ -21,9 +21,11 @@ public class MultiPolygonWriter implements Writer<MultiPolygon> {
     protected String writeMultiPolygon(MultiPolygon multiPolygon){ ;
         String wktMultiPolygonString = Constants.LEFT_PARENTHESES;
 
-        for (Polygon polygon : multiPolygon) {
-            wktMultiPolygonString += PolygonWriter.writePolygon(polygon);
-            wktMultiPolygonString += ", ";
+        for (int index=0; index < multiPolygon.size(); index++){
+            wktMultiPolygonString += PolygonWriter.writePolygon(multiPolygon.get(index));
+            if (index != multiPolygon.size()-1){
+                wktMultiPolygonString += ", ";
+            }
         }
         wktMultiPolygonString += Constants.RIGHT_PARENTHESES;
 

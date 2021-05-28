@@ -23,7 +23,7 @@ public class PolygonWriter implements Writer<Polygon>{
         wktPolygon += LineStringWriter.writeCoordinateSequence(polygon.getOuter());
         int numHoles = polygon.getNumHoles();
         for(int index=0; index<numHoles; index++){
-            wktPolygon += Constants.COMMA;
+            wktPolygon += Constants.COMMA + " ";
             wktPolygon += LineStringWriter.writeCoordinateSequence(polygon.getHole(index));
         }
         wktPolygon += Constants.RIGHT_PARENTHESES;

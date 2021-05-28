@@ -10,9 +10,7 @@ import java.util.Iterator;
 
 public class MultiPointWriter implements Writer<MultiPoint> {
 
-
     public String write(MultiPoint multiPoint){
-        System.out.println("Isasa");
         StringBuffer wktString = new StringBuffer(Constants.MULTIPOINT + " ");
         if (multiPoint.isEmpty()){
             wktString.append(Constants.EMPTY);
@@ -27,11 +25,13 @@ public class MultiPointWriter implements Writer<MultiPoint> {
         String wktMultiPoint = Constants.LEFT_PARENTHESES;
         Iterator<Point> multiPointIterator = multiPoint.iterator();
 
-        while(multiPointIterator.hasNext()){
-            Object point =  multiPointIterator.next();
-            wktMultiPoint += pointWriter.writePoint((Point) point);
-            wktMultiPoint += ", ";
+        for (int index=0; index < multiPoint.size(); index++){
+            wktMultiPoint += pointWriter.writePoint(multiPoint.get(index));
+            if (index != multiPoint.size()-1){
+                wktMultiPoint += ", ";
+            }
         }
+
         wktMultiPoint += Constants.RIGHT_PARENTHESES;
 
         return wktMultiPoint;
