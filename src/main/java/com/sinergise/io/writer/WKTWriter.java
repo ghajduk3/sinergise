@@ -1,13 +1,11 @@
 package com.sinergise.io.writer;
 
 import com.sinergise.geometry.Geometry;
-import com.sinergise.geometry.GeometryCollection;
-import com.sinergise.geometry.LineString;
-import com.sinergise.geometry.Point;
+import com.sinergise.io.writer.writers.Writer;
 
 public class WKTWriter {
-    public String write(Geometry geom) {
-        //TODO: Implement this
-        return write(new GeometryCollection<>(new Geometry[]{new Point(4, 6), new LineString(new double[]{4, 6, 7, 10})}));
+    public String write(Geometry geometry) {
+        Writer writer = WKTWriterFactory.getWriter(geometry);
+        return writer.write(geometry);
     }
 }
