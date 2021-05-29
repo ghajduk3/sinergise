@@ -1,6 +1,7 @@
 package com.sinergise.io.writer;
 
 import com.sinergise.geometry.Geometry;
+import com.sinergise.io.writer.writers.PolygonWriter;
 import com.sinergise.io.writer.writers.Writer;
 
 public class WKTWriter {

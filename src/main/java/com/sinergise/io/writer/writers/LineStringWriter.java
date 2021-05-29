@@ -2,35 +2,31 @@ package com.sinergise.io.writer.writers;
 
 import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.LineString;
-import com.sinergise.geometry.Point;
 import com.sinergise.io.utils.Constants;
 
-import javax.sound.sampled.Line;
-
-public class LineStringWriter implements Writer<LineString> {
+public class LineStringWriter extends Writer{
 
     @Override
-    public String write(LineString lineString) {
-        StringBuffer wktString = new StringBuffer(Constants.LINESTRING + " ");
-        if (lineString.isEmpty()){
-            wktString.append(Constants.EMPTY);
-            return wktString.toString();
-        }
-        wktString.append(writeCoordinateSequence(lineString));
-
-        return wktString.toString();
+    public String write(Geometry lineString) {
+        return Constants.LINESTRING + " " + this.writeLineString((LineString) lineString);
     }
 
-    public static String writeCoordinateSequence(LineString lineString){
-        String wktCoordinateSequence = Constants.LEFT_PARENTHESES;
+    protected String writeLineString(LineString lineString) {
+        StringBuilder wktLineString = new StringBuilder(Constants.LEFT_PARENTHESES);
+
+        if (lineString.isEmpty()) {
+            wktLineString.append(Constants.EMPTY);
+            return wktLineString.toString();
+        }
+
         int numCoordinates = lineString.getNumCoords();
-        for (int index = 0; index < numCoordinates; index++){
-            wktCoordinateSequence += String.format("%.0f %.0f", lineString.getX(index), lineString.getY(index));
-            if(index != numCoordinates -1){
-                wktCoordinateSequence += ", ";
+        for (int index = 0; index < numCoordinates; index++) {
+            wktLineString.append(String.format("%.0f %.0f", lineString.getX(index), lineString.getY(index)));
+            if (index != numCoordinates - 1) {
+                wktLineString.append(Constants.COMMA + " ");
             }
         }
-        wktCoordinateSequence += Constants.RIGHT_PARENTHESES;
-        return wktCoordinateSequence;
+        wktLineString.append(Constants.RIGHT_PARENTHESES);
+        return wktLineString.toString();
     }
 }

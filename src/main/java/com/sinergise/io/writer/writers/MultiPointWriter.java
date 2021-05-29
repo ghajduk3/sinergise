@@ -1,39 +1,31 @@
 package com.sinergise.io.writer.writers;
 
+import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.MultiPoint;
-import com.sinergise.geometry.MultiPolygon;
-import com.sinergise.geometry.Point;
-import com.sinergise.geometry.Polygon;
 import com.sinergise.io.utils.Constants;
 
-import java.util.Iterator;
+public class MultiPointWriter extends PointWriter {
 
-public class MultiPointWriter implements Writer<MultiPoint> {
-
-    public String write(MultiPoint multiPoint){
-        StringBuffer wktString = new StringBuffer(Constants.MULTIPOINT + " ");
-        if (multiPoint.isEmpty()){
-            wktString.append(Constants.EMPTY);
-            return wktString.toString();
-        }
-        wktString.append(this.writeMultiPoint(multiPoint));
-        return wktString.toString();
+    public String write(Geometry multiPoint) {
+        return Constants.MULTIPOINT + " " + this.writeMultiPoint((MultiPoint) multiPoint);
     }
 
-    protected String writeMultiPoint(MultiPoint multiPoint){
-        PointWriter pointWriter = new PointWriter();
-        String wktMultiPoint = Constants.LEFT_PARENTHESES;
-        Iterator<Point> multiPointIterator = multiPoint.iterator();
-
-        for (int index=0; index < multiPoint.size(); index++){
-            wktMultiPoint += pointWriter.writePoint(multiPoint.get(index));
-            if (index != multiPoint.size()-1){
-                wktMultiPoint += ", ";
-            }
+    protected String writeMultiPoint(MultiPoint multiPoint) {
+        StringBuilder wktMultiPointString = new StringBuilder();
+        if (multiPoint.isEmpty()) {
+            wktMultiPointString.append(Constants.EMPTY);
+            return wktMultiPointString.toString();
         }
 
-        wktMultiPoint += Constants.RIGHT_PARENTHESES;
+        wktMultiPointString.append(Constants.LEFT_PARENTHESES);
 
-        return wktMultiPoint;
+        for (int index = 0; index < multiPoint.size(); index++) {
+            wktMultiPointString.append(this.writePoint(multiPoint.get(index)));
+            if (index != multiPoint.size() - 1) {
+                wktMultiPointString.append(Constants.COMMA + " ");
+            }
+        }
+        wktMultiPointString.append(Constants.RIGHT_PARENTHESES);
+        return wktMultiPointString.toString();
     }
 }
