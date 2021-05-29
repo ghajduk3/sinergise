@@ -12,16 +12,17 @@ public class LineStringWriter extends Writer{
     }
 
     protected String writeLineString(LineString lineString) {
-        StringBuilder wktLineString = new StringBuilder(Constants.LEFT_PARENTHESES);
+        StringBuilder wktLineString = new StringBuilder();
 
         if (lineString.isEmpty()) {
             wktLineString.append(Constants.EMPTY);
             return wktLineString.toString();
         }
 
+        wktLineString.append(Constants.LEFT_PARENTHESES);
         int numCoordinates = lineString.getNumCoords();
         for (int index = 0; index < numCoordinates; index++) {
-            wktLineString.append(String.format("%.0f %.0f", lineString.getX(index), lineString.getY(index)));
+            wktLineString.append(this.format(lineString.getX(index), lineString.getY(index)));
             if (index != numCoordinates - 1) {
                 wktLineString.append(Constants.COMMA + " ");
             }

@@ -6,6 +6,7 @@ import com.sinergise.io.utils.Constants;
 
 public class MultiPolygonWriter extends PolygonWriter {
 
+    @Override
     public String write(Geometry multiPolygon) {
         return Constants.MULTIPOLYGON + " " + this.writeMultiPolygon((MultiPolygon) multiPolygon);
     }

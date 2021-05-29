@@ -6,6 +6,7 @@ import com.sinergise.io.utils.Constants;
 
 public class MultiPointWriter extends PointWriter {
 
+    @Override
     public String write(Geometry multiPoint) {
         return Constants.MULTIPOINT + " " + this.writeMultiPoint((MultiPoint) multiPoint);
     }

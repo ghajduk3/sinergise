@@ -17,7 +17,7 @@ public class PointWriter extends Writer{
             wktPointString.append(Constants.EMPTY);
             return wktPointString.toString();
         }
-        wktPointString.append(String.format(Constants.LEFT_PARENTHESES + "%.0f %.0f" + Constants.RIGHT_PARENTHESES, point.getX(), point.getY()));
+        wktPointString.append(Constants.LEFT_PARENTHESES).append(this.format(point.getX(), point.getY())).append(Constants.RIGHT_PARENTHESES);
         return wktPointString.toString();
     }
 }

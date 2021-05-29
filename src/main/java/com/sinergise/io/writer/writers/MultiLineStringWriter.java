@@ -5,7 +5,7 @@ import com.sinergise.geometry.MultiLineString;
 import com.sinergise.io.utils.Constants;
 
 public class MultiLineStringWriter extends LineStringWriter {
-
+    @Override
     public String write(Geometry multiLineString) {
         return Constants.MULTILINESTRING + " " + this.writeMultiLineString((MultiLineString) multiLineString);
     }

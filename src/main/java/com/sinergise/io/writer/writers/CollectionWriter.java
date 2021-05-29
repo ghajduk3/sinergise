@@ -6,9 +6,10 @@ import com.sinergise.io.utils.Constants;
 import com.sinergise.io.writer.WKTWriterFactory;
 
 public class CollectionWriter extends Writer {
+
     @Override
     public String write(Geometry geometry) {
-        return Constants.LINESTRING + " " + this.writeGeometryCollection((GeometryCollection) geometry);
+        return Constants.GEOMETRYCOLLECTION + " " + this.writeGeometryCollection((GeometryCollection) geometry);
     }
 
     protected String writeGeometryCollection(GeometryCollection geometryCollection) {
