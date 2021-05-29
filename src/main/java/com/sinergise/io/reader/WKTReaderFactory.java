@@ -2,14 +2,21 @@ package com.sinergise.io.reader;
 
 import com.sinergise.io.reader.parsers.*;
 import com.sinergise.io.utils.Constants;
+import com.sinergise.io.utils.exceptions.NonExistingParser;
+
 import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.text.ParseException;
 
 public class WKTReaderFactory {
-
+    /**
+     *
+     * @param tokenizer
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     public static Parser getReader(StreamTokenizer tokenizer) throws IOException, ParseException {
-//        String readerType = Parser.getNextValidToken(tokenizer);
         tokenizer.nextToken();
         String readerType = tokenizer.sval;
         switch (readerType){
@@ -21,6 +28,6 @@ public class WKTReaderFactory {
             case Constants.MULTILINESTRING: return new MultiLineStringParser();
             case Constants.GEOMETRYCOLLECTION: return new CollectionParser();
         }
-        throw new ParseException("Unknown geometry tYpe", tokenizer.lineno());
+        throw new NonExistingParser("Unknown geometry type", tokenizer.lineno());
     }
 }

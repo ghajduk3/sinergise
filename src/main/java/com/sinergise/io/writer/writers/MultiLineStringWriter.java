@@ -1,37 +1,42 @@
 package com.sinergise.io.writer.writers;
 
-import com.sinergise.geometry.LineString;
+import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.MultiLineString;
-import com.sinergise.geometry.MultiPoint;
-import com.sinergise.geometry.Point;
 import com.sinergise.io.utils.Constants;
 
-import javax.sound.sampled.Line;
-import java.util.Iterator;
-
-public class MultiLineStringWriter implements Writer<MultiLineString>{
-
-    public String write(MultiLineString multiLineString){
-        StringBuffer wktString = new StringBuffer(Constants.MULTILINESTRING + " ");
-        if (multiLineString.isEmpty()){
-            wktString.append(Constants.EMPTY);
-            return wktString.toString();
-        }
-        wktString.append(this.writeMultiLineString(multiLineString));
-        return wktString.toString();
+public class MultiLineStringWriter extends LineStringWriter {
+    /**
+     *
+     * @param multiLineString
+     * @return
+     */
+    @Override
+    public String write(Geometry multiLineString) {
+        return Constants.MULTILINESTRING + " " + this.writeMultiLineString((MultiLineString) multiLineString);
     }
 
-    protected String writeMultiLineString(MultiLineString multiLineString){ ;
-        String wktMultiLineString = Constants.LEFT_PARENTHESES;
+    /**
+     *
+     * @param multiLineString
+     * @return
+     */
+    protected String writeMultiLineString(MultiLineString multiLineString) {
+        ;
+        StringBuilder wktMultiLineString = new StringBuilder();
+        if (multiLineString.isEmpty()) {
+            wktMultiLineString.append(Constants.EMPTY);
+            return wktMultiLineString.toString();
+        }
+        wktMultiLineString.append(Constants.LEFT_PARENTHESES);
 
-        for (int index=0; index < multiLineString.size(); index++){
-            wktMultiLineString += LineStringWriter.writeCoordinateSequence(multiLineString.get(index));
-            if (index != multiLineString.size()-1){
-                wktMultiLineString += ", ";
+        for (int index = 0; index < multiLineString.size(); index++) {
+            wktMultiLineString.append(this.writeLineString(multiLineString.get(index)));
+            if (index != multiLineString.size() - 1) {
+                wktMultiLineString.append(Constants.COMMA + " ");
             }
         }
-        wktMultiLineString += Constants.RIGHT_PARENTHESES;
+        wktMultiLineString.append(Constants.RIGHT_PARENTHESES);
 
-        return wktMultiLineString;
+        return wktMultiLineString.toString();
     }
 }

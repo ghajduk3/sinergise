@@ -11,8 +11,15 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiPolygonParser extends Parser {
+public class MultiPolygonParser extends PolygonParser {
 
+    /**
+     *
+     * @param tokenizer
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     @Override
     public Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException {
         String nextToken = this.getNextValidToken(tokenizer);
@@ -20,9 +27,8 @@ public class MultiPolygonParser extends Parser {
             return new MultiPolygon();
         }
         List<Polygon> polygons = new ArrayList<>();
-        PolygonParser polygonReader = new PolygonParser();
         do {
-            polygons.add(polygonReader.read(tokenizer));
+            polygons.add(super.readPolygon(tokenizer));
         } while(this.getNextValidToken(tokenizer).equalsIgnoreCase(","));
         return new MultiPolygon(polygons.toArray(new Polygon[0]));
     }

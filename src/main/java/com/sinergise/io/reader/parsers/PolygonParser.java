@@ -1,5 +1,6 @@
 package com.sinergise.io.reader.parsers;
 
+import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.LineString;
 import com.sinergise.geometry.Polygon;
 import com.sinergise.io.utils.Constants;
@@ -10,19 +11,29 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PolygonParser extends Parser {
+public class PolygonParser extends LineStringParser {
 
     @Override
-    public Polygon read(StreamTokenizer tokenizer) throws IOException, ParseException {
+    public Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException {
+        return this.readPolygon(tokenizer);
+    }
+
+    /**
+     *
+     * @param tokenizer
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
+    protected Polygon readPolygon(StreamTokenizer tokenizer) throws IOException, ParseException {
         String nextToken = this.getNextValidToken(tokenizer);
         if (nextToken.equalsIgnoreCase(Constants.EMPTY)){
             return new Polygon();
         }
-        LineStringParser lineStringReader = new LineStringParser();
-        LineString outer = lineStringReader.read(tokenizer);
+        LineString outer = super.readLineString(tokenizer);
         List<LineString> holes = new ArrayList<>();
         while(this.getNextValidToken(tokenizer).equalsIgnoreCase(",")) {
-            holes.add(lineStringReader.read(tokenizer));
+            holes.add(super.readLineString(tokenizer));
         }
         return new Polygon(outer,holes.toArray(new LineString[0]));
     }

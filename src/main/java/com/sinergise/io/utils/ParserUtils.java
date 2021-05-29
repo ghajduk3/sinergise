@@ -1,14 +1,15 @@
 package com.sinergise.io.utils;
 
-import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParserUtils {
 
+    /**
+     *
+     * @param reader
+     * @return
+     */
     public static StreamTokenizer constructTokenizer(StringReader reader) {
         StreamTokenizer tokenizer = new StreamTokenizer(reader);
         tokenizer.resetSyntax();
@@ -24,7 +25,4 @@ public class ParserUtils {
 
         return tokenizer;
     }
-
-
-
 }

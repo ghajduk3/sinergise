@@ -11,19 +11,25 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiPointParser extends Parser {
+public class MultiPointParser extends PointParser {
 
+    /**
+     *
+     * @param tokenizer
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     @Override
     public Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException {
         String nextToken = this.getNextValidToken(tokenizer);
         if (nextToken.equalsIgnoreCase(Constants.EMPTY)){
             return new MultiPoint();
         }
-        PointParser pointParser = new PointParser();
         List<Point> points = new ArrayList<>();
 
         do {
-            points.add(pointParser.read(tokenizer));
+            points.add(super.readPoint(tokenizer));
         } while(this.getNextValidToken(tokenizer).equalsIgnoreCase(Constants.COMMA));
 
         return new MultiPoint(points.toArray(new Point[0]));
