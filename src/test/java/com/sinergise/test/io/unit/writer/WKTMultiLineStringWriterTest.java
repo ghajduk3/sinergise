@@ -1,4 +1,4 @@
-package com.sinergise.test.io.writer.unit;
+package com.sinergise.test.io.unit.writer;
 
 import com.sinergise.geometry.LineString;
 import com.sinergise.geometry.MultiLineString;

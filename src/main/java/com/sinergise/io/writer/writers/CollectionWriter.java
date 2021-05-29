@@ -3,16 +3,17 @@ package com.sinergise.io.writer.writers;
 import com.sinergise.geometry.Geometry;
 import com.sinergise.geometry.GeometryCollection;
 import com.sinergise.io.utils.Constants;
+import com.sinergise.io.utils.exceptions.NonExistingWriter;
 import com.sinergise.io.writer.WKTWriterFactory;
 
 public class CollectionWriter extends Writer {
 
     @Override
-    public String write(Geometry geometry) {
+    public String write(Geometry geometry) throws NonExistingWriter {
         return Constants.GEOMETRYCOLLECTION + " " + this.writeGeometryCollection((GeometryCollection) geometry);
     }
 
-    protected String writeGeometryCollection(GeometryCollection geometryCollection) {
+    protected String writeGeometryCollection(GeometryCollection geometryCollection) throws NonExistingWriter {
         StringBuilder wktGeometryCollectionString = new StringBuilder();
         if (geometryCollection.isEmpty()) {
             wktGeometryCollectionString.append(Constants.EMPTY);

@@ -2,6 +2,8 @@ package com.sinergise.io.reader.parsers;
 
 import com.sinergise.geometry.Geometry;
 import com.sinergise.io.utils.Constants;
+import com.sinergise.io.utils.exceptions.NumberParseException;
+import com.sinergise.io.utils.exceptions.TokenParseException;
 
 import java.io.IOException;
 import java.io.StreamTokenizer;
@@ -28,7 +30,7 @@ public abstract class Parser {
             case 44:
                 return Constants.COMMA;
         }
-        throw new ParseException("Geometry type expected", tokenizer.lineno());
+        throw new TokenParseException("Geometry type expected", tokenizer.lineno());
     }
 
     protected double getNextNumber(StreamTokenizer tokenizer) throws ParseException, IOException {
@@ -38,10 +40,10 @@ public abstract class Parser {
             try {
                 return Double.parseDouble(tokenizer.sval);
             } catch (NumberFormatException e) {
-                throw new ParseException("Invalid number parsed : " + tokenizer.sval, tokenizer.lineno());
+                throw new NumberParseException("Invalid number parsed : " + tokenizer.sval, tokenizer.lineno());
             }
         }
-        throw new ParseException("Coordinate number expected", tokenizer.lineno());
+        throw new NumberParseException("Coordinate number expected", tokenizer.lineno());
     }
 
     protected List<Double> getCoordinates(StreamTokenizer tokenizer) throws IOException, ParseException {

@@ -1,7 +1,8 @@
-package com.sinergise.test.io.writer.unit;
+package com.sinergise.test.io.unit.writer;
 
 import com.sinergise.geometry.*;
 import com.sinergise.io.utils.Constants;
+import com.sinergise.io.utils.exceptions.NonExistingWriter;
 import com.sinergise.io.writer.writers.CollectionWriter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,13 +15,13 @@ public class WKTCollectionWriterTest {
 
     @Test
     @DisplayName("Test empty GeometryCollection")
-    public void writeEmptyGeometryCollection() {
+    public void writeEmptyGeometryCollection() throws NonExistingWriter {
         Assertions.assertEquals(Constants.GEOMETRYCOLLECTION + " " + Constants.EMPTY, collectionWriter.write(new GeometryCollection<>()));
     }
 
     @Test
     @DisplayName("Test with one linestring")
-    public void writeOneLineString() {
+    public void writeOneLineString() throws NonExistingWriter {
         Point p1 = new Point(40, 10);
         LineString l1 = new LineString(new double[]{10, 10, 20, 20, 10, 40});
         LineString outer = new LineString(new double[]{40, 40, 20, 45, 45, 30, 40, 40});

@@ -1,10 +1,11 @@
 package com.sinergise.io.writer;
 
 import com.sinergise.geometry.*;
+import com.sinergise.io.utils.exceptions.NonExistingWriter;
 import com.sinergise.io.writer.writers.*;
 
 public class WKTWriterFactory {
-    public static Writer getWriter(Geometry geometry) {
+    public static Writer getWriter(Geometry geometry) throws NonExistingWriter {
         if (geometry instanceof Point) {
             return new PointWriter();
         } else if (geometry instanceof LineString) {
@@ -20,6 +21,6 @@ public class WKTWriterFactory {
         } else if (geometry instanceof GeometryCollection) {
             return new CollectionWriter();
         }
-        return null;
+        throw new NonExistingWriter();
     }
 }
