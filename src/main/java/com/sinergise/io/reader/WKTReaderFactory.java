@@ -9,7 +9,6 @@ import java.text.ParseException;
 public class WKTReaderFactory {
 
     public static Parser getReader(StreamTokenizer tokenizer) throws IOException, ParseException {
-//        String readerType = Parser.getNextValidToken(tokenizer);
         tokenizer.nextToken();
         String readerType = tokenizer.sval;
         switch (readerType){

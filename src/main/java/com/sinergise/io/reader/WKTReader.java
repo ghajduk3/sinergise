@@ -1,6 +1,6 @@
 package com.sinergise.io.reader;
 
-import com.sinergise.geometry.*;
+import com.sinergise.geometry.Geometry;
 import com.sinergise.io.reader.parsers.Parser;
 import com.sinergise.io.utils.ParserUtils;
 
@@ -18,6 +18,4 @@ public class WKTReader {
             return wktParser.read(tokenizer);
         }
     }
-
-
 }

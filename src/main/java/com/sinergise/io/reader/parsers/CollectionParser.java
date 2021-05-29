@@ -20,11 +20,11 @@ public class CollectionParser extends Parser {
             return new GeometryCollection<>();
         }
 
-        List elements = new ArrayList();
+        List<Geometry> elements = new ArrayList<>();
         do {
             Parser parser = WKTReaderFactory.getReader(tokenizer);
             elements.add(parser.read(tokenizer));
-        } while(this.getNextValidToken(tokenizer).equalsIgnoreCase(","));
-        return new GeometryCollection(elements);
+        } while(this.getNextValidToken(tokenizer).equalsIgnoreCase(Constants.COMMA));
+        return new GeometryCollection<Geometry>(elements);
     }
 }

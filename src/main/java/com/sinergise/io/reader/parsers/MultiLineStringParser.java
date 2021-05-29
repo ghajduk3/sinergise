@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiLineStringParser extends Parser {
+public class MultiLineStringParser extends LineStringParser {
 
     @Override
     public Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException {
@@ -20,9 +20,8 @@ public class MultiLineStringParser extends Parser {
             return new MultiLineString();
         }
         List<LineString> lineStrings = new ArrayList<>();
-        LineStringParser lineStringReader = new LineStringParser();
         do {
-            lineStrings.add(lineStringReader.read(tokenizer));
+            lineStrings.add(super.readLineString(tokenizer));
         } while(this.getNextValidToken(tokenizer).equalsIgnoreCase(","));
 
         return new MultiLineString(lineStrings.toArray(new LineString[0]));

@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Parser {
-    public abstract Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException;
 
+    public abstract Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException;
 
     protected String getNextValidToken(StreamTokenizer tokenizer) throws IOException, ParseException {
         int tokenType = tokenizer.nextToken();
-        switch (tokenType){
+        switch (tokenType) {
             case StreamTokenizer.TT_WORD:
                 String word = tokenizer.sval;
                 if (word.equalsIgnoreCase(Constants.EMPTY))
@@ -34,18 +34,17 @@ public abstract class Parser {
     protected double getNextNumber(StreamTokenizer tokenizer) throws ParseException, IOException {
         int tokenType = tokenizer.nextToken();
 
-        switch (tokenType) {
-            case StreamTokenizer.TT_WORD:
-                try {
-                    return Double.parseDouble(tokenizer.sval);
-                } catch (NumberFormatException e){
-                    throw new ParseException("Invalid number parsed : " + tokenizer.sval,tokenizer.lineno());
-                }
+        if (tokenType == StreamTokenizer.TT_WORD) {
+            try {
+                return Double.parseDouble(tokenizer.sval);
+            } catch (NumberFormatException e) {
+                throw new ParseException("Invalid number parsed : " + tokenizer.sval, tokenizer.lineno());
+            }
         }
         throw new ParseException("Coordinate number expected", tokenizer.lineno());
     }
 
-    protected  List<Double> getCoordinates(StreamTokenizer tokenizer) throws IOException, ParseException {
+    protected List<Double> getCoordinates(StreamTokenizer tokenizer) throws IOException, ParseException {
         List<Double> coords = new ArrayList<>();
 
         do {
