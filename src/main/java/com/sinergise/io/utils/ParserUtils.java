@@ -5,6 +5,11 @@ import java.io.StringReader;
 
 public class ParserUtils {
 
+    /**
+     *
+     * @param reader
+     * @return
+     */
     public static StreamTokenizer constructTokenizer(StringReader reader) {
         StreamTokenizer tokenizer = new StreamTokenizer(reader);
         tokenizer.resetSyntax();

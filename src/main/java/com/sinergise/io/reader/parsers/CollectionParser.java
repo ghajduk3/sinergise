@@ -13,6 +13,13 @@ import java.util.List;
 
 public class CollectionParser extends Parser {
 
+    /**
+     *
+     * @param tokenizer
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     @Override
     public Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException {
         String nextToken = this.getNextValidToken(tokenizer);

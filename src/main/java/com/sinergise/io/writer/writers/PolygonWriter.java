@@ -5,11 +5,20 @@ import com.sinergise.geometry.Polygon;
 import com.sinergise.io.utils.Constants;
 
 public class PolygonWriter extends LineStringWriter {
-
+    /**
+     *
+     * @param polygon
+     * @return
+     */
     public String write(Geometry polygon) {
         return Constants.POLYGON + " " + this.writePolygon((Polygon) polygon);
     }
 
+    /**
+     *
+     * @param polygon
+     * @return
+     */
     public String writePolygon(Polygon polygon) {
         StringBuilder wktPolygonString = new StringBuilder();
         if (polygon.isEmpty()) {

@@ -18,6 +18,13 @@ public class PolygonParser extends LineStringParser {
         return this.readPolygon(tokenizer);
     }
 
+    /**
+     *
+     * @param tokenizer
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     protected Polygon readPolygon(StreamTokenizer tokenizer) throws IOException, ParseException {
         String nextToken = this.getNextValidToken(tokenizer);
         if (nextToken.equalsIgnoreCase(Constants.EMPTY)){

@@ -15,6 +15,13 @@ public class PointParser extends Parser {
         return this.readPoint(tokenizer);
     }
 
+    /**
+     *
+     * @param tokenizer
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     protected Point readPoint(StreamTokenizer tokenizer) throws IOException, ParseException {
         String nextToken = this.getNextValidToken(tokenizer);
         if (nextToken.equalsIgnoreCase(Constants.EMPTY)){

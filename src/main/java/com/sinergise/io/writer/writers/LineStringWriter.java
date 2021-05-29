@@ -5,12 +5,21 @@ import com.sinergise.geometry.LineString;
 import com.sinergise.io.utils.Constants;
 
 public class LineStringWriter extends Writer{
-
+    /**
+     *
+     * @param lineString
+     * @return
+     */
     @Override
     public String write(Geometry lineString) {
         return Constants.LINESTRING + " " + this.writeLineString((LineString) lineString);
     }
 
+    /**
+     *
+     * @param lineString
+     * @return
+     */
     protected String writeLineString(LineString lineString) {
         StringBuilder wktLineString = new StringBuilder();
 

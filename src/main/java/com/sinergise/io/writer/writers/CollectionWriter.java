@@ -7,12 +7,23 @@ import com.sinergise.io.utils.exceptions.NonExistingWriter;
 import com.sinergise.io.writer.WKTWriterFactory;
 
 public class CollectionWriter extends Writer {
-
+    /**
+     *
+     * @param geometry
+     * @return
+     * @throws NonExistingWriter
+     */
     @Override
     public String write(Geometry geometry) throws NonExistingWriter {
         return Constants.GEOMETRYCOLLECTION + " " + this.writeGeometryCollection((GeometryCollection) geometry);
     }
 
+    /**
+     *
+     * @param geometryCollection
+     * @return
+     * @throws NonExistingWriter
+     */
     protected String writeGeometryCollection(GeometryCollection geometryCollection) throws NonExistingWriter {
         StringBuilder wktGeometryCollectionString = new StringBuilder();
         if (geometryCollection.isEmpty()) {

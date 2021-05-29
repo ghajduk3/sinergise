@@ -10,7 +10,13 @@ import java.text.ParseException;
 import java.util.List;
 
 public class LineStringParser extends Parser {
-
+    /**
+     *
+     * @param tokenizer
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     @Override
     public Geometry read(StreamTokenizer tokenizer) throws IOException, ParseException {
         return this.readLineString(tokenizer);

@@ -5,11 +5,21 @@ import com.sinergise.geometry.MultiLineString;
 import com.sinergise.io.utils.Constants;
 
 public class MultiLineStringWriter extends LineStringWriter {
+    /**
+     *
+     * @param multiLineString
+     * @return
+     */
     @Override
     public String write(Geometry multiLineString) {
         return Constants.MULTILINESTRING + " " + this.writeMultiLineString((MultiLineString) multiLineString);
     }
 
+    /**
+     *
+     * @param multiLineString
+     * @return
+     */
     protected String writeMultiLineString(MultiLineString multiLineString) {
         ;
         StringBuilder wktMultiLineString = new StringBuilder();

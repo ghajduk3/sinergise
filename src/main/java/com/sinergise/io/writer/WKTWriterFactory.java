@@ -5,6 +5,12 @@ import com.sinergise.io.utils.exceptions.NonExistingWriter;
 import com.sinergise.io.writer.writers.*;
 
 public class WKTWriterFactory {
+    /**
+     *
+     * @param geometry
+     * @return
+     * @throws NonExistingWriter
+     */
     public static Writer getWriter(Geometry geometry) throws NonExistingWriter {
         if (geometry instanceof Point) {
             return new PointWriter();

@@ -5,12 +5,21 @@ import com.sinergise.geometry.MultiPoint;
 import com.sinergise.io.utils.Constants;
 
 public class MultiPointWriter extends PointWriter {
-
+    /**
+     *
+     * @param multiPoint
+     * @return
+     */
     @Override
     public String write(Geometry multiPoint) {
         return Constants.MULTIPOINT + " " + this.writeMultiPoint((MultiPoint) multiPoint);
     }
 
+    /**
+     *
+     * @param multiPoint
+     * @return
+     */
     protected String writeMultiPoint(MultiPoint multiPoint) {
         StringBuilder wktMultiPointString = new StringBuilder();
         if (multiPoint.isEmpty()) {
